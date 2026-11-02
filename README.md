@@ -1,6 +1,6 @@
 # Skills
 
-Claude Code skills, one per directory (`<name>/SKILL.md`). Each one is a set of instructions that you run by hand as `/<name>`, optionally followed by any context you want to give, such as `/groundwork a recipe-sharing site`. None of them checks or requires another.
+Claude Code skills, one per directory under `skills/` (`skills/<name>/SKILL.md`). Each one is a set of instructions that you run by hand as `/<name>`, optionally followed by any context you want to give, such as `/groundwork a recipe-sharing site`. None of them checks or requires another.
 
 They fall into two groups: skills that start a new project, and standalone skills you can use on any project, at any time.
 
@@ -37,7 +37,7 @@ These work on any project, whether or not it was started with `groundwork`.
 
 ## Installing
 
-Copy a skill's directory into `~/.claude/skills/` to use it in every project, or into a project's `.claude/skills/` to use it there only.
+Copy a skill's directory from `skills/` into `~/.claude/skills/` to use it in every project, or into a project's `.claude/skills/` to use it there only.
 
 ## Contributing
 

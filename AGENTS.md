@@ -1,6 +1,6 @@
 # Skills repo
 
-This repo holds Claude Code skills for anyone to use, one per directory (`<name>/SKILL.md`). What each skill does is in `README.md`, and the current state of the repo is in `docs/state.md`. The repo follows the `groundwork` skill's principles, applied to itself.
+This repo holds Claude Code skills for anyone to use, one per directory under `skills/` (`skills/<name>/SKILL.md`), and nothing else lives there. What each skill does is in `README.md`, and the current state of the repo is in `docs/state.md`. The repo follows the `groundwork` skill's principles, applied to itself.
 
 This file is the repo's only agent instruction file. Don't add a `CLAUDE.md`, `.claude/CLAUDE.md` or `CLAUDE.local.md`: Claude Code would then stop reading this one.
 
