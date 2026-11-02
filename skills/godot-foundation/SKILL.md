@@ -36,7 +36,7 @@ The current stable Godot 4 with C#, in nullable-enabled C# with warnings treated
 
 **Look.** A Godot `Theme` holds a small set of colors and fonts, named by role (surface, text, accent, danger…), so the user can change the look of the interface by adjusting a few values. Placeholder art is plainly placeholder. Don't hand-build art or complex interface elements. When the game needs them, suggest asset sources or tools, and let the user decide.
 
-**Languages.** Which languages the game speaks is a product decision, so ask early. If there is more than one, every player-facing string goes through Godot's translation system before any feature, because adding it later touches every string.
+**Languages.** Which languages the game speaks can be decided later, so don't ask. The game is written ready for translation instead: every player-facing string goes through Godot's translation system, with its source text as the key, sentences use placeholders rather than pieces joined together, and counts use plural forms. A game in one language pays nothing for it, and adding a language later means adding a translation file and checking that fonts and layouts still fit, not revisiting every string. Write this into `AGENTS.md`, since every feature adds strings.
 
 ## Checks and continuous integration
 
