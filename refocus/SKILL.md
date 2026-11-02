@@ -15,7 +15,7 @@ This skill finds those rules, so the user can decide to forget them. It removes 
 
 ## The anchor comes from the user
 
-Your understanding of the project comes from the very documents under audit, and judged by their own standard they pass. The way out is an anchor from outside: the goal, stated by the user. It is `$ARGUMENTS` if given. Otherwise, ask for it before reading any project file. A useful goal names the project's purpose, its consumer (a person, an agent, another system), one or two typical tasks the consumer performs with it, and optionally, for an unfinished project, the current milestone.
+Your understanding of the project comes from the very documents under audit, and judged by their own standard they pass. The way out is an anchor from outside: the goal, stated by the user. If the user didn't give it when invoking the skill, ask for it before reading any project file. A useful goal names the project's purpose, its consumer (a person, an agent, another system), one or two typical tasks the consumer performs with it, and optionally, for an unfinished project, the current milestone.
 
 For the same reason, the first phase changes nothing. Your reading of the project is itself under audit. Your misreadings are findings, because every future agent will read the project the same way.
 

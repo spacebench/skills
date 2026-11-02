@@ -16,9 +16,9 @@ const MANUAL_ONLY = "Use only when the user explicitly invokes it.";
 
 /**
  * Returns the convention violations in one skill's `SKILL.md`: frontmatter with
- * known keys, `name` equal to the directory, manual-only wording, `argument-hint`
- * present exactly when the body reads `$ARGUMENTS`, gap-free numbered lists, and
- * no mention of another skill, since skills have no enforced order.
+ * known keys, `name` equal to the directory, manual-only wording, no
+ * `$ARGUMENTS` (the user's text follows the skill anyway), gap-free numbered
+ * lists, and no mention of another skill, since skills have no enforced order.
  */
 export function lintSkill(
   skill: string,
@@ -51,12 +51,9 @@ export function lintSkill(
     errors.push(`manual-only description must end with "${MANUAL_ONLY}"`);
 
   const body = text.slice(match[0].length);
-  const readsArguments = body.includes("$ARGUMENTS");
-  if (readsArguments !== fm.has("argument-hint"))
+  if (body.includes("$ARGUMENTS"))
     errors.push(
-      readsArguments
-        ? "body reads $ARGUMENTS but there is no argument-hint"
-        : "argument-hint is set but the body never reads $ARGUMENTS",
+      "uses $ARGUMENTS, but the user's text follows the skill anyway",
     );
 
   let expected = 1;

@@ -38,16 +38,14 @@ test("manual-only skills end their description with the standard sentence", () =
   assert.ok(lint(text).some((e) => e.includes("must end with")));
 });
 
-test("argument-hint and $ARGUMENTS go together", () => {
+test("$ARGUMENTS is not used, an argument-hint alone is fine", () => {
   assert.ok(
-    lint(valid("Scope: $ARGUMENTS\n")).some((e) =>
-      e.includes("no argument-hint"),
-    ),
+    lint(valid("Scope: $ARGUMENTS\n")).some((e) => e.includes("$ARGUMENTS")),
   );
   const hintOnly = skill(
     `name: demo\ndescription: Does things. ${MANUAL}\ndisable-model-invocation: true\nargument-hint: "[x]"`,
   );
-  assert.ok(lint(hintOnly).some((e) => e.includes("never reads $ARGUMENTS")));
+  assert.deepEqual(lint(hintOnly), []);
 });
 
 test("numbered lists have no gaps", () => {

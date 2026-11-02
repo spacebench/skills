@@ -9,8 +9,6 @@ argument-hint: "[anything worth knowing about the app]"
 
 This lays the foundation of a Next.js application: a project that runs locally with no external service, with its checks, continuous integration, and the principles of this stack in `AGENTS.md`. Features come later.
 
-What the user said when invoking it: $ARGUMENTS
-
 Read `AGENTS.md` and `docs/` first. The principles below apply the general ones written there, and are added to them as applications, not restatements.
 
 ## Environment

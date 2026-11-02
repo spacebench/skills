@@ -29,7 +29,7 @@ Skills are prompts for frontier models. A capable model needs an environment and
 
 - **Goal and done, not steps.** A skill says what it is for, what must hold at the end ("Done when"), and the principles and decisions that matter, each with its reason. A few general steps are fine where the order matters, such as reading the goal before the files in `refocus`. Prescribing each step's inputs and outputs is not, and neither is spelling out what any capable model would do anyway.
 - **Leave inferable values open.** Don't fix what a model can infer from the project, the environment or the conversation. Fix a value only when it is a real decision, such as the stack in a path.
-- **Context at invocation.** Every skill has an `argument-hint` and reads `$ARGUMENTS` as context from the user, and infers the rest. It asks only what it can't infer and what would change the result.
+- **Context at invocation.** Whatever the user types after the command reaches the model after the skill anyway, so skills don't use `$ARGUMENTS`. An `argument-hint` tells users what is worth typing. A skill takes that context, infers the rest, and asks only what it can't infer and what would change the result.
 - **No fixed audience.** Skills don't assume who the user is. They adapt to what the user says and how they say it.
 
 ## Skill conventions

@@ -9,7 +9,7 @@ argument-hint: "[scope, and anything worth knowing]"
 
 Goal: leave the code in a state where one more full pass would find nothing worth changing. Behavior is preserved, and only the form of the code changes.
 
-Scope and context from the user: $ARGUMENTS. By default the whole repository, skipping generated, vendored and ignored files.
+Scope: what the user asked for, by default the whole repository, skipping generated, vendored and ignored files.
 
 ## The project's principles come first
 

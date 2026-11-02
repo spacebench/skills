@@ -9,9 +9,7 @@ argument-hint: "[what the project is, and anything worth knowing]"
 
 This prepares a new project, before any code and whatever its technology: a repository on GitHub, and an `AGENTS.md` holding the working principles every later session follows. The stack and its tools come later, built on these principles.
 
-What the user said when invoking it: $ARGUMENTS
-
-Take that as context, along with the folder and the conversation. Ask only about what you can't infer and what would change the result. Adapt to the user: the language they write in, and how much technical detail they want.
+Take what the user said when invoking it as context, along with the folder and the conversation. Ask only about what you can't infer and what would change the result. Adapt to the user: the language they write in, and how much technical detail they want.
 
 ## Environment
 
