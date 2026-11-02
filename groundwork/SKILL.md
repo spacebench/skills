@@ -31,6 +31,8 @@ Initialize git, create the GitHub repository with the CLI, and push. From then o
 
 Write these into an `AGENTS.md` at the project root. You may reword and tighten them, but keep every principle and its reasoning: they are the rules future sessions will follow. Describe the environment and the expectations, so a capable agent knows how to work here. Do not write a checklist.
 
+`AGENTS.md` is the project's only agent instruction file. Claude Code reads it natively (version 2.1.277 or later), but only when there is no `CLAUDE.md`, `.claude/CLAUDE.md` or `CLAUDE.local.md` in the project folder or any folder above it. Any one of them silently replaces `AGENTS.md`. Create none of them. Check the folders above the project too (the user's own `~/.claude/CLAUDE.md` doesn't count), and if you find one, tell the user what it hides. Write this rule into `AGENTS.md` itself, so that no later session adds a `CLAUDE.md`.
+
 Keep `AGENTS.md` to what applies to nearly every task. Topic-specific detail belongs in `docs/`, with a one-line pointer in `AGENTS.md`, so the always-loaded file stays short and every line in it matters. Later skills add the principles specific to the project's technology.
 
 **Working with the user.** Product decisions belong to the user. When a technical choice affects them, say so plainly: costs, accounts to create, console steps they must do. When a request conflicts with these principles, say so and propose a better way.
