@@ -13,8 +13,8 @@ Read `AGENTS.md` and `docs/` first. The principles below apply the general ones 
 
 ## Environment
 
-- **The .NET SDK and the .NET edition of Godot**, with Godot's export templates, and their versions pinned in one place that local work and CI both read. The editor is an application the user installs and opens, so help them with it.
-- **Few tools.** Every tool is something a contributor installs and CI downloads, so the project needs only .NET, Godot and a Markdown formatter. Project scripts, such as the checks, are C# run with `dotnet run`, so they work on every operating system with nothing more.
+- **Few tools.** Every tool is something a contributor installs and CI downloads, so the project needs only the .NET SDK, the .NET edition of Godot with its export templates, and dprint for Markdown. Project scripts, such as the checks, are C# run with `dotnet run`, so they work on every operating system with nothing more.
+- **Installed and pinned.** Check what the machine already has, then get whatever is missing or at the wrong version: install it yourself where you can, and where only the user can, such as when it needs an administrator password, give them the exact steps for their system. Godot has no installer, so put it where the checks find it and show the user how to open the editor. Pin each version where local work and CI both read it, and have the checks verify the versions they find, so a mismatch stops them with a clear message rather than a strange failure. Finish by running each tool once.
 - **A way to see the game.** Work isn't done until you have seen the game running. You can't play it the way a person does, so the game gives you the means: a debug launch, through command-line arguments, that starts it in a given state, plays scripted input, saves screenshots at chosen moments, and quits. Look at the screenshots and read the engine's log. What you can't judge, such as how controls feel or whether timing is right, belongs to the user: tell them precisely what to playtest.
 
 Settle with the user, up front, whatever only they can do, so the rest of the work needs no interruption.
