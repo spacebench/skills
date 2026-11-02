@@ -86,7 +86,7 @@ The graph makes the drift visible. The intended chain was "short functions → r
 
 ### Step 6: Report, then stop
 
-Write the report using the template below and stop. Don't edit and don't offer a fix for each item. Invite the user to correct the graph.
+Write the report using the template below, in chat unless the user's request says to put it somewhere else, and stop. Don't edit and don't offer a fix for each item. Invite the user to correct the graph.
 
 ```markdown
 # Refocus report — <project name>

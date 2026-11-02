@@ -56,6 +56,8 @@ Tie-breakers: if a later pass might reasonably revert it, don't make it. When in
 
 ## Final report
 
+Give the report in chat, unless the user's request says to put it somewhere else.
+
 - Number of passes and a one-line summary per pass
 - Net lines added/removed
 - Final status of every check
