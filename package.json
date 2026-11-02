@@ -8,7 +8,7 @@
   },
   "scripts": {
     "check:fast": "prettier --write . && node scripts/check.ts && tsc",
-    "check": "prettier --check . && node scripts/check.ts && tsc"
+    "check": "prettier --check . && node scripts/check.ts && tsc && node --test scripts/*.test.ts"
   },
   "devDependencies": {
     "@types/node": "^26.6.6",

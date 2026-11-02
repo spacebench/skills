@@ -1,86 +1,65 @@
 ---
 name: next-foundation
-description: Lays the foundation of a Next.js application — the user's Node and browser setup, stack, local Postgres via PGlite, seed data, checks, continuous integration, and the stack's principles in AGENTS.md. Use only when the user explicitly invokes it.
+description: Lays the foundation of a Next.js application — stack, local Postgres through PGlite, seed data, checks, continuous integration, browser access for the agent, and the stack's principles in AGENTS.md. Use only when the user explicitly invokes it.
 disable-model-invocation: true
+argument-hint: "[anything worth knowing about the app]"
 ---
 
-# Next foundation: lay the Next.js foundation
+# Next foundation
 
-Read `AGENTS.md` and `docs/state.md` first. This skill builds the foundation of a Next.js application: a project that runs, with its quality tooling, continuous integration and the principles specific to this stack.
+This lays the foundation of a Next.js application: a project that runs locally with no external service, with its checks, continuous integration, and the principles of this stack in `AGENTS.md`. Features come later.
 
-## Everything the user has to do, first
+What the user said when invoking it: $ARGUMENTS
 
-Do all the setup that needs the user at the very beginning, in one guided session. Check what is already in place, walk the user through anything missing for their operating system, verify each item, and check current documentation rather than memory. Here is what must be in place:
+Read `AGENTS.md` and `docs/` first. The principles below apply the general ones written there, and are added to them as applications, not restatements.
 
-- **Node and pnpm.** If no Node version manager is installed, use fnm. It works the same on every operating system, reads the project's version file, and switches versions automatically. Pin the Node and pnpm versions in the standard files any version manager and CI read.
-- **Browser access for you.** You need to see and use the app, because the user cannot verify your work for you. In Claude Code, the official way is the Claude in Chrome extension (Chrome or Edge). The user installs it, and the integration is enabled by default so it is there every session. Another agent uses the equivalent its environment provides. The extension drives the user's own browser, so tell them you could see what they are logged into there. In practice, you stay on the local app. Confirm it works by opening a page.
-- **Permissions.** Extend the project's permission setup so the package manager, the project scripts and the browser run without asking each time.
+## Environment
 
-Only once all of this is in place, start building.
+- **Node and pnpm**, with their versions pinned where version managers and CI read them.
+- **A browser you can drive.** Work isn't done until you have used the app the way its users will. In Claude Code, this is the Claude in Chrome extension. It drives the user's own browser, so tell them you could see what they are signed into there.
+
+Settle with the user, up front, whatever only they can do, so the rest of the work needs no interruption.
 
 ## The stack
 
-- **Framework:** Next.js with the App Router, TypeScript in strict mode, pnpm, Tailwind CSS.
-- **Data:** Postgres through Drizzle. Zod for every schema that crosses a boundary.
+Next.js with the App Router, TypeScript in strict mode, pnpm and Tailwind CSS. Postgres through Drizzle. Zod for anything crossing a boundary. These libraries move fast, so use their current stable versions and check their documentation rather than your memory. Install only what the foundation needs: other libraries arrive with the feature that needs them. Hosting is decided later, so nothing ties the app to a host or provider.
 
-Install only what this foundation needs. Libraries arrive with the feature that needs them.
+**Database.** One Drizzle schema, with versioned migrations that are committed and never edited once applied. Locally, Postgres runs inside the Node process through PGlite, so a fresh clone needs only Node and pnpm. Only the database client knows which driver is in use. Given a regular Postgres connection string, it switches driver with no change anywhere else. A seed script fills the database with realistic data, and one command resets, migrates and seeds it. That gives the user a populated app at once, gives you realistic cases to test against, and makes a broken local state cheap to recover from. The seed follows the schema as it evolves.
 
-These libraries move fast, so use their current stable versions and check their documentation rather than your memory of their APIs.
+**Configuration.** Environment variables are parsed with Zod in one module, so a missing one stops the app at startup with a clear message. An example env file documents each variable and where its value comes from.
 
-Hosting and production are decided later. Until then, avoid anything that ties the app to a specific host or provider.
+**Email, later.** Nothing sends email yet, but record the choice in `AGENTS.md`. When a feature first needs email, it goes through Resend, from one small module the domain calls. Without a Resend key, emails are written to the console, so local work never needs an account.
 
-The database is Postgres, with a single Drizzle schema. Locally, it runs on PGlite, which is Postgres running inside the Node process. A fresh clone needs nothing installed beyond Node and pnpm, and the PGlite data folder is git-ignored. The database client is the only place that knows which driver is in use. When a standard Postgres connection string is configured, the client should be able to switch to a regular Postgres driver without changes anywhere else.
+**Look.** A small set of design tokens, named by role (surface, text, accent, danger…), lives in one place as Tailwind theme variables, and light and dark modes share it. That way the user can change the look by adjusting a few values. Don't hand-build complex components. When the app needs them, suggest a component library such as shadcn/ui, and let the user decide.
 
-Schema changes go through versioned migrations: generated, committed, and never edited once applied. A seed script fills the local database with realistic sample data, and one command wipes the database, migrates it and seeds it again. That command lets the user see a populated app immediately, lets you test against realistic cases, and makes a broken local state cheap to recover from. Keep the seed data in step with the schema as it evolves.
-
-Environment variables are parsed with Zod in one module, so the app fails at startup with a clear message if one is missing. An example env file documents every variable and where its value comes from.
-
-Nothing sends email at this stage. Write the choice for later into `AGENTS.md`, without installing anything. When a feature first needs to send email, it goes through Resend, from one small module the domain calls. When no Resend key is configured, emails are written to the console instead of failing, so local work never needs a Resend account.
-
-Design tokens live in one place as Tailwind theme variables. The set is small and named by role (surface, text, accent, danger...) so the user can change the look by adjusting a few values with you. Light and dark modes use the same tokens. Do not hand-build complex presentational components. When the app needs them, suggest a component library (shadcn/ui by default) and let the user decide.
+**Languages.** Which languages the interface speaks is a product decision, so ask early. If there is more than one, set up internationalization before any feature, because adding it later touches every string.
 
 ## Checks and continuous integration
 
-These are the project's automated checks, which the definition of done in `AGENTS.md` refers to:
+The fast and full checks use Prettier (Markdown included, with EditorConfig), ESLint with typescript-eslint, and `tsc`. The full check adds Vitest for domain logic, against an in-memory PGlite migrated with the real migrations, then Playwright smoke tests of the main flows and the production build. ESLint warnings fail the check like errors. Write the tools, and what each check runs, into `AGENTS.md`.
 
-- **Formatting:** Prettier, Markdown included, with EditorConfig.
-- **Linting:** ESLint with typescript-eslint.
-- **Type checking:** a separate `tsc` pass.
-- **Unit tests:** Vitest, focused on domain logic and run against an in-memory PGlite migrated with the real migrations.
-- **End-to-end tests:** Playwright smoke tests covering the main user flows.
-- **Build:** the production build.
+A GitHub Actions workflow runs the full check on every push and pull request. It calls the same command as local work, so the two can't drift apart. It needs no secrets, since nothing external is involved, and it caches dependencies and Playwright browsers.
 
-These are the stack's tools for the fast and full checks described in `AGENTS.md`. The fast check applies Prettier to every file, Markdown included, then runs ESLint and `tsc`. The full check runs everything: formatting, linting, type checking, unit tests, end-to-end tests and the production build. It passes when formatting matches Prettier, ESLint reports no errors and no warnings, `tsc` reports no type errors, every unit and end-to-end test passes, and the production build succeeds. Write the tools and this precise meaning into `AGENTS.md`, as the application of the general rule about checks.
+## Principles for AGENTS.md
 
-A GitHub Actions workflow runs on every push and every pull request. It installs dependencies from the lockfile with the pinned Node and pnpm versions, installs the browsers Playwright needs, and runs the full check. It calls the full check command rather than duplicating its steps, so local and CI checks cannot drift apart. The check needs no external service, so the workflow needs no secrets. Keep it fast by caching dependencies and Playwright browsers.
+**Continuous integration.** Every push runs the full check on a clean machine. A red run means the work isn't done, whatever passed locally, and fixing it comes first. Follow each run until it finishes. Neither the workflow nor the check is ever weakened to get a green run. The definition of done gains a green run on the pushed commit, and having used the app in the browser.
 
-Add this principle to `AGENTS.md`, and extend the definition of done so that it includes a green CI run on the pushed commit:
+**Capabilities and interfaces in Next.js.** Data access is the only code that knows about Drizzle. Capabilities never import from Next.js. Server components and server actions are interfaces, as a CLI or a public API added later would be.
 
-**Continuous integration.** Every push runs the full check on GitHub Actions, on a clean machine. A red run means the work is not done, whatever passed locally, and fixing it comes first. After every push, follow the run with the GitHub CLI until it finishes. The workflow calls the full check command rather than duplicating it, and neither is ever weakened to get a green result.
+**Server actions, not internal APIs.** Server components get their data by calling domain functions, never by fetching the app's own HTTP endpoints. Every change of data the UI triggers goes through a server action. An action reads the session and the input, validates them, calls the domain, revalidates or redirects, and returns a typed result the UI can show, field errors included. Route handlers exist only for what truly needs an HTTP endpoint, such as webhooks, auth callbacks, or an API with a real external consumer.
 
-## The principles of this stack
+**Everything is validated with Zod.** No data enters the system unparsed: action inputs, route and search parameters, request bodies, cookies and headers read for logic, environment variables, and responses from outside services. Domain functions validate their own inputs too, so they stay safe whatever calls them. Each schema is defined once. Types are inferred from it, and the same schema validates forms on the client when the UI needs instant feedback. A validation failure becomes a typed, user-facing error, never a silent default.
 
-Add these to `AGENTS.md`, alongside the general principles already there. Some of them say how the general principles apply in this stack. Write them as that application, not as a restatement. The same rules apply: you may reword and tighten them, but keep every principle and its reasoning, and do not write a checklist.
+**Server first.** Render on the server by default. Client components exist only where the browser is needed, and they stay small and low in the tree.
 
-**Capabilities and interfaces in Next.js.** Data access is the only code that knows about Drizzle. Capabilities never import from Next.js. Server components and server actions are interfaces, and so would be a CLI or a public API added later.
-
-**Server actions, not internal APIs.** Server components get their data by calling domain functions directly, never by fetching the app's own HTTP endpoints. Every change of data the UI triggers goes through a server action: forms, buttons, any mutation. A server action is an interface like any other. It reads the session and the input, validates it, calls the domain, then revalidates or redirects, and returns a typed result the UI can show, including field errors. Route handlers exist only for what truly needs an HTTP endpoint, such as webhooks, auth callbacks, or a public API with a real external consumer.
-
-**Everything is validated with Zod.** No data enters the system unparsed. That covers server action inputs and form data, route and search parameters, request bodies, cookies and headers read for logic, environment variables, and responses from third-party services. Domain functions validate their own inputs with Zod as well, so they stay safe whichever interface calls them. Each schema is defined once and is the single source of truth: TypeScript types are inferred from it, and the same schema serves client-side form validation when the UI needs instant feedback. Validation failures become typed, user-facing errors, never silent defaults.
-
-**Server first.** Render on the server by default. Client components exist only where the browser is needed, and they stay small and low in the tree. A large client component wrapping much of a page deserves a second look.
-
-**Types in TypeScript.** Strict mode stays on. `any`, non-null assertions (`!`) and `as` casts are the escape hatches the general rule forbids. Types of external data are inferred from Zod schemas, never written twice.
+**Types in TypeScript.** Strict mode stays on. `any`, non-null assertions and `as` casts are the escape hatches the general rule forbids. Types of external data are inferred from Zod schemas, never written twice.
 
 ## Done when
 
-- A fresh clone runs with `pnpm install` then `pnpm dev`, and nothing else.
-- The home page renders on the server and shows seeded data read from the local database through the domain layer. This proves the chain from schema and migration to page.
-- The reset-and-seed command works.
-- The full check exists and passes. It includes one real unit test of a domain function against in-memory PGlite and one Playwright smoke test of the home page.
-- Browser access works, and you have opened the app in a browser and seen it work.
-- Env validation, the example env file, the pinned Node and pnpm versions and the initial design tokens are in place, and the page uses the tokens.
-- `AGENTS.md` holds the stack principles and the precise meaning of the fast and full checks. `docs/state.md` is current and records that next-foundation has been applied. The README explains how to run the app and reset its data.
-- Everything is committed and pushed, and the CI run on the latest commit has passed.
+- A fresh clone runs with `pnpm install` and `pnpm dev`, and nothing else.
+- The home page, rendered on the server, shows seeded data read through the domain layer. That proves the chain from schema to page. The reset command works.
+- The full check passes, with at least one real unit test of a domain function and one Playwright smoke test. CI is green on the latest pushed commit.
+- You have opened the app in the browser and seen it work.
+- `AGENTS.md`, `docs/state.md` and the README (how to run the app and reset its data) reflect what now exists.
 
-Finish by telling the user, in plain words, what now exists. The next move is the product discussion described in `AGENTS.md`.
+Tell the user what now exists.

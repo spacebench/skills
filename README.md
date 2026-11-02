@@ -1,6 +1,6 @@
 # Skills
 
-Claude Code skills, one per directory (`<name>/SKILL.md`). Each one is a set of instructions that you run by hand as `/<name>`. None of them checks or requires another.
+Claude Code skills, one per directory (`<name>/SKILL.md`). Each one is a set of instructions that you run by hand as `/<name>`, optionally followed by any context you want to give, such as `/groundwork a recipe-sharing site`. None of them checks or requires another.
 
 They fall into two groups: skills that start a new project, and standalone skills you can use on any project, at any time.
 
@@ -10,7 +10,12 @@ A new project starts with `groundwork`. Then a path for the chosen technology bu
 
 ### The basis: `groundwork`
 
-Prepares a new project before any code is written, whatever its technology. It sets up the user's tools (git, GitHub, permissions), creates the repository, and writes into `AGENTS.md` the working principles that every later session follows: the definition of done, the fast and full checks, git, and how knowledge is kept in the repo.
+Prepares a new project before any code is written, whatever its technology: the git and GitHub repository, and an `AGENTS.md` holding the working principles every later session follows. At their core:
+
+- **Capabilities first, interfaces second.** What the project can do is written once, independent of how it is reached (a CLI, an API, web pages, a game engine) and of where its data is stored, so interfaces and storage can be swapped.
+- **Truthful types.** Types say exactly what the domain allows, and are never weakened to satisfy the compiler.
+- **Every fact lives in one place.** What code does is documented in its doc comments, docs explain the why, and references use stable IDs, never numbers.
+- **Automated checks.** A formatter, a linter, a type checker and tests, run by a fast check after every change and a full check before work counts as done.
 
 ### Paths
 

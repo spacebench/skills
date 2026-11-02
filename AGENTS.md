@@ -1,6 +1,6 @@
 # Skills repo
 
-This repo holds Claude Code skills for anyone to use, one per directory (`<name>/SKILL.md`). What each skill does is in `README.md`; the current state of the repo is in `docs/state.md`. The structure follows the `groundwork` skill, applied to this repo itself.
+This repo holds Claude Code skills for anyone to use, one per directory (`<name>/SKILL.md`). What each skill does is in `README.md`, and the current state of the repo is in `docs/state.md`. The repo follows the `groundwork` skill's principles, applied to itself.
 
 This file is the repo's only agent instruction file. Don't add a `CLAUDE.md`, `.claude/CLAUDE.md` or `CLAUDE.local.md`: Claude Code would then stop reading this one.
 
@@ -15,21 +15,29 @@ Work is finished when the full check passes, `README.md` and `docs/state.md` ref
 ## Checks
 
 - `pnpm check:fast` applies Prettier to every file, Markdown included, then runs the skill linter (`scripts/check.ts`) and `tsc`. Every turn that changes files ends with it.
-- `pnpm check` runs the same steps, but only verifies formatting instead of applying it. It is what the definition of done refers to.
+- `pnpm check` also runs the linter's tests, and only verifies formatting instead of applying it. It is what the definition of done refers to.
 
-There are no tests: the only code is the linter, and running it on the skills exercises it. Add tests if the linter grows logic that its run on the skills doesn't cover.
+The linter's rules are plain functions in `scripts/lint.ts`, tested in `scripts/lint.test.ts`. `scripts/check.ts` only runs them on the repo.
 
 ## Git
 
 The agent manages git: it commits each coherent, passing unit of work with a message that explains why, pushes, and never rewrites pushed history. The default branch is `master`.
 
+## How skills are written
+
+Skills are prompts for frontier models. A capable model needs an environment and a goal, not a pipeline.
+
+- **Goal and done, not steps.** A skill says what it is for, what must hold at the end ("Done when"), and the principles and decisions that matter, each with its reason. A few general steps are fine where the order matters, such as reading the goal before the files in `refocus`. Prescribing each step's inputs and outputs is not, and neither is spelling out what any capable model would do anyway.
+- **Leave inferable values open.** Don't fix what a model can infer from the project, the environment or the conversation. Fix a value only when it is a real decision, such as the stack in a path.
+- **Context at invocation.** Every skill has an `argument-hint` and reads `$ARGUMENTS` as context from the user, and infers the rest. It asks only what it can't infer and what would change the result.
+- **No fixed audience.** Skills don't assume who the user is. They adapt to what the user says and how they say it.
+
 ## Skill conventions
 
-These hold for every skill, because the skills are used together and an agent reads each one in isolation.
+These hold for every skill, because an agent reads each one in isolation. The linter enforces the first three.
 
 - **Name.** The directory name is the `name` in the frontmatter.
-- **Manual only.** Every skill sets `disable-model-invocation: true`, and its description ends with "Use only when the user explicitly invokes it." The linter enforces both.
-- **Arguments.** A skill has an `argument-hint` exactly when its body reads `$ARGUMENTS` and says what to do without it.
-- **No enforced order.** A skill is a set of instructions. It never checks whether another skill was applied, and never stops because one wasn't. The recommended order is described in `README.md` only.
-- **Shared vocabulary.** The project-setup skills share terms with the `AGENTS.md` they write in target projects: "the fast check" and "the full check", "the definition of done", "the product discussion", and "`docs/state.md` records that <skill> has been applied". When you change one of these terms, change it in every skill.
-- **One fact, one place.** A rule lives in the skill that owns it. Other skills point to it rather than restating it, unless the skill must stand alone without that rule.
+- **Manual only.** Every skill sets `disable-model-invocation: true`, and its description ends with "Use only when the user explicitly invokes it."
+- **No enforced order.** A skill never names another skill, checks whether one was applied, or stops because one wasn't. The recommended order, `groundwork` first, then a path for the project's technology, is described in `README.md` only.
+- **Principles live in `groundwork`.** Its principles apply to any project. A path writes its own principles as applications of them, not restatements, and the standalone skills work within whatever principles a project states.
+- **Shared vocabulary.** The skills share terms with the `AGENTS.md` that `groundwork` writes: "the fast check" and "the full check", "the definition of done", "capabilities" and "interfaces", and `docs/state.md`. When you change one of these terms, change it in every skill.
