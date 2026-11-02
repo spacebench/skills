@@ -26,6 +26,10 @@ A path lays the foundation for one technology on top of `groundwork`, then adds 
 1. `next-foundation` sets up Next.js, Drizzle and a local Postgres through PGlite, with seed data, the checks, CI and the stack's principles.
 2. `next-accounts` adds Better Auth accounts, workspaces, permissions, optional teams and the GDPR foundations.
 
+**Godot**, for games in C#:
+
+1. `godot-foundation` sets up a Godot game with its rules in a C# library independent of the engine, fixture states, a debug launch that lets the agent see the game, the checks, CI and the stack's principles.
+
 Other paths can be added the same way, for example Python data science.
 
 ## Standalone skills
