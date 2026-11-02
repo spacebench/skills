@@ -12,7 +12,7 @@ Claude Code skills, one per directory (`<name>/SKILL.md`). All of them are manua
 
 ## Next.js setup
 
-Each skill works on its own, and fits on top of the one before.
+Both run after `groundwork`. `next-accounts` fits on top of `next-foundation` but doesn't require it.
 
 | Skill             | What it does                                                                            |
 | ----------------- | --------------------------------------------------------------------------------------- |

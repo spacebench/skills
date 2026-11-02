@@ -1,18 +1,17 @@
 ---
 name: next-foundation
-description: Lays the foundation of a Next.js application — the user's Node and browser setup, stack, local Postgres via PGlite, seed data, checks, continuous integration, and the stack's principles in AGENTS.md. Use only when the user explicitly invokes it.
+description: Lays the foundation of a Next.js application on a project prepared by groundwork — the user's Node and browser setup, stack, local Postgres via PGlite, seed data, checks, continuous integration, and the stack's principles in AGENTS.md. Use only when the user explicitly invokes it.
 disable-model-invocation: true
 ---
 
 # Next foundation: lay the Next.js foundation
 
-Read `AGENTS.md` and `docs/state.md` first. This skill fits on top of groundwork but does not require it: if either file is missing, create it, and wherever this skill relies on a general principle that is not written there (the definition of done, the fast and full checks, the product discussion), write that principle in too. This skill builds the foundation of a Next.js application: a project that runs, with its quality tooling, continuous integration and the principles specific to this stack.
+This skill runs after groundwork. Read `AGENTS.md` and `docs/state.md` first. If groundwork has not been applied (no `AGENTS.md`, or `docs/state.md` does not record it), stop and tell the user to run groundwork first. This skill builds the foundation of a Next.js application on top of it: a project that runs, with its quality tooling, continuous integration and the principles specific to this stack.
 
 ## Everything the user has to do, first
 
 Do all the setup that needs the user at the very beginning, in one guided session. Check what is already in place, walk the user through anything missing for their operating system, verify each item, and check current documentation rather than memory. Here is what must be in place:
 
-- **Git and GitHub.** The project is a git repository with a GitHub remote, and the GitHub CLI is authenticated, because continuous integration runs there.
 - **Node and pnpm.** If no Node version manager is installed, use fnm. It works the same on every operating system, reads the project's version file, and switches versions automatically. Pin the Node and pnpm versions in the standard files any version manager and CI read.
 - **Browser access for you.** You need to see and use the app, because the user cannot verify your work for you. In Claude Code, the official way is the Claude in Chrome extension (Chrome or Edge). The user installs it, and the integration is enabled by default so it is there every session. Another agent uses the equivalent its environment provides. The extension drives the user's own browser, so tell them you could see what they are logged into there. In practice, you stay on the local app. Confirm it works by opening a page.
 - **Permissions.** Extend the project's permission setup so the package manager, the project scripts and the browser run without asking each time.
