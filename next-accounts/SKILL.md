@@ -1,12 +1,12 @@
 ---
 name: next-accounts
-description: Adds user accounts, workspaces and permissions to a Next.js app on a project prepared by groundwork, with team features built if the user wants them and always ready to turn on later. It covers Better Auth, a private dashboard, roles, optional team membership and invitations, permission checks in the domain, and the GDPR foundations (data register, export, deletion), all working locally. Use only when the user explicitly invokes it.
+description: Adds user accounts, workspaces and permissions to a Next.js app, with team features built if the user wants them and always ready to turn on later. It covers Better Auth, a private dashboard, roles, optional team membership and invitations, permission checks in the domain, and the GDPR foundations (data register, export, deletion), all working locally. Use only when the user explicitly invokes it.
 disable-model-invocation: true
 ---
 
 # Next accounts: accounts, workspaces and permissions
 
-This skill runs after groundwork. Read `AGENTS.md` and `docs/state.md` first, along with anything else in `docs/` that bears on this work. If groundwork has not been applied (no `AGENTS.md`, or `docs/state.md` does not record it), stop and tell the user to run groundwork first. This skill fits on top of next-foundation but does not require it. It expects that stack and its conventions: Drizzle on Postgres with versioned migrations and a reset-and-seed command, Zod at every boundary, server actions for every mutation, Vitest and Playwright in the full check, and CI on GitHub Actions. Where the project already does one of these differently, use its equivalent. Where one is missing, set it up first.
+Read `AGENTS.md` and `docs/state.md` first, along with anything else in `docs/` that bears on this work. This skill expects the following stack and conventions: Drizzle on Postgres with versioned migrations and a reset-and-seed command, Zod at every boundary, server actions for every mutation, Vitest and Playwright in the full check, and CI on GitHub Actions. Where the project already does one of these differently, use its equivalent. Where one is missing, set it up first.
 
 This skill gives the app user accounts, workspaces ready for teams, a permission model, and the privacy foundations every later feature builds on, all working locally.
 

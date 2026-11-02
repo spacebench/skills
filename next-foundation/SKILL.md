@@ -1,12 +1,12 @@
 ---
 name: next-foundation
-description: Lays the foundation of a Next.js application on a project prepared by groundwork — the user's Node and browser setup, stack, local Postgres via PGlite, seed data, checks, continuous integration, and the stack's principles in AGENTS.md. Use only when the user explicitly invokes it.
+description: Lays the foundation of a Next.js application — the user's Node and browser setup, stack, local Postgres via PGlite, seed data, checks, continuous integration, and the stack's principles in AGENTS.md. Use only when the user explicitly invokes it.
 disable-model-invocation: true
 ---
 
 # Next foundation: lay the Next.js foundation
 
-This skill runs after groundwork. Read `AGENTS.md` and `docs/state.md` first. If groundwork has not been applied (no `AGENTS.md`, or `docs/state.md` does not record it), stop and tell the user to run groundwork first. This skill builds the foundation of a Next.js application on top of it: a project that runs, with its quality tooling, continuous integration and the principles specific to this stack.
+Read `AGENTS.md` and `docs/state.md` first. This skill builds the foundation of a Next.js application: a project that runs, with its quality tooling, continuous integration and the principles specific to this stack.
 
 ## Everything the user has to do, first
 
@@ -83,4 +83,4 @@ Add these to `AGENTS.md`, alongside the general principles already there. Some o
 - `AGENTS.md` holds the stack principles and the precise meaning of the fast and full checks. `docs/state.md` is current and records that next-foundation has been applied. The README explains how to run the app and reset its data.
 - Everything is committed and pushed, and the CI run on the latest commit has passed.
 
-Finish by telling the user, in plain words, what now exists. If the app needs user accounts, the next-accounts skill adds them. Otherwise, the next move is the product discussion described in `AGENTS.md`.
+Finish by telling the user, in plain words, what now exists. The next move is the product discussion described in `AGENTS.md`.

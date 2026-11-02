@@ -12,7 +12,7 @@ Claude Code skills, one per directory (`<name>/SKILL.md`). All of them are manua
 
 ## Next.js setup
 
-Both run after `groundwork`. `next-accounts` fits on top of `next-foundation` but doesn't require it.
+Recommended order: `groundwork`, then `next-foundation`, then `next-accounts`.
 
 | Skill             | What it does                                                                            |
 | ----------------- | --------------------------------------------------------------------------------------- |

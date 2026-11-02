@@ -78,8 +78,8 @@ When the docs and the code disagree, the code wins, and you fix the docs.
 ## Done when
 
 - Everything the user had to set up is in place, and the rest of the project can proceed without asking them for help.
-- `AGENTS.md`, `docs/state.md` and a short README (what the project is, where the docs are) exist. `docs/state.md` records that groundwork has been applied, so later skills can see what is already in place.
+- `AGENTS.md`, `docs/state.md` and a short README (what the project is, where the docs are) exist. `docs/state.md` records that groundwork has been applied, so later sessions can see what is already in place.
 - The permission setup is committed.
 - Everything is committed and pushed.
 
-Finish by telling the user, in plain words, what is now in place and that the next move is to lay the foundation for the technology that fits the type of project (next-foundation, for a web application).
+Finish by telling the user, in plain words, what is now in place and that the next move is to lay the foundation for the technology that fits the type of project.

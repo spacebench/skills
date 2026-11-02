@@ -30,6 +30,6 @@ These hold for every skill, because the skills are used together and an agent re
 - **Name.** The directory name is the `name` in the frontmatter.
 - **Manual only.** Every skill sets `disable-model-invocation: true`, and its description ends with "Use only when the user explicitly invokes it." The linter enforces both.
 - **Arguments.** A skill has an `argument-hint` exactly when its body reads `$ARGUMENTS` and says what to do without it.
-- **Prerequisites.** The Next.js setup skills run after `groundwork`, and stop if `docs/state.md` doesn't record it. Otherwise skills don't require each other: a skill may fit on top of another (`next-accounts` on `next-foundation`), but it sets up whatever it relies on that is missing.
+- **No enforced order.** A skill is a set of instructions. It never checks whether another skill was applied, and never stops because one wasn't. The recommended order is described in `README.md` only.
 - **Shared vocabulary.** The project-setup skills share terms with the `AGENTS.md` they write in target projects: "the fast check" and "the full check", "the definition of done", "the product discussion", and "`docs/state.md` records that <skill> has been applied". When you change one of these terms, change it in every skill.
 - **One fact, one place.** A rule lives in the skill that owns it. Other skills point to it rather than restating it, unless the skill must stand alone without that rule.
