@@ -1,6 +1,6 @@
 # Skills
 
-My Claude Code skills, one per directory (`<name>/SKILL.md`). All of them are manual-only and run as `/<name>`. Working conventions are in `AGENTS.md`, and the current state is in `docs/state.md`.
+Claude Code skills, one per directory (`<name>/SKILL.md`). All of them are manual-only and run as `/<name>`. Working conventions are in `AGENTS.md`, and the current state is in `docs/state.md`.
 
 ## General purpose
 
@@ -18,6 +18,10 @@ Each skill works on its own, and fits on top of the one before.
 | ----------------- | --------------------------------------------------------------------------------------- |
 | `next-foundation` | Next.js, Drizzle and PGlite foundation, with the checks, CI and the stack's principles. |
 | `next-accounts`   | Better Auth accounts, workspaces, permissions, optional teams and the GDPR foundations. |
+
+## Installing
+
+Copy a skill's directory into `~/.claude/skills/` to use it in every project, or into a project's `.claude/skills/` to use it there only. Then run it as `/<name>` in Claude Code.
 
 ## Checks
 

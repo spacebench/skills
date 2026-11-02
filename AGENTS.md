@@ -1,12 +1,12 @@
 # Skills repo
 
-This repo is the source of my Claude Code skills, one per directory (`<name>/SKILL.md`). What each skill does is in `README.md`; the current state of the repo is in `docs/state.md`. The structure follows the `groundwork` skill, applied to this repo itself.
+This repo holds Claude Code skills for anyone to use, one per directory (`<name>/SKILL.md`). What each skill does is in `README.md`; the current state of the repo is in `docs/state.md`. The structure follows the `groundwork` skill, applied to this repo itself.
 
 This file is the repo's only agent instruction file. Don't add a `CLAUDE.md`, `.claude/CLAUDE.md` or `CLAUDE.local.md`: Claude Code would then stop reading this one.
 
 ## Working with the user
 
-The skills are the user's: what a skill asks for is their decision. When a request makes skills contradict each other or breaks a convention below, say so and propose a better way.
+What a skill asks for is the maintainer's decision. When a request makes skills contradict each other or breaks a convention below, say so and propose a better way.
 
 ## Definition of done
 
