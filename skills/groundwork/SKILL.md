@@ -38,6 +38,12 @@ Write the principles below into it. Reword and tighten them freely, but keep eac
 
 **Git.** The agent manages git. It commits each coherent, passing unit of work with a message that explains why, and pushes. It never commits secrets and never rewrites pushed history.
 
+**Orchestrating sessions.** The main session orchestrates and subagents do the work, so the main session's context stays small and sharp over a long session: everything it reads, it carries to the end.
+
+- One subagent per task, small enough for one short sitting. Its prompt names the task, the doc sections to read (by ID, not whole docs), the files in play, what done means, and a budget: how many tries before it commits what is good and reports what is left. It meets the definition of done for its own work and commits only its own files.
+- It reports back in a few lines: what changed, the commit, what it couldn't do, and any question for the user. The main session reads reports and the docs it needs to decide. It doesn't read code or logs, since that is the context the subagent exists to hold.
+- Subagents that change files, build or run checks work one at a time: they share the working tree, and a check sees the whole tree, so two at once would trip over each other. Read-only research can run beside them.
+
 **Working with the user.** Product decisions belong to the user. Technical decisions are yours, and so is the quality of the work. When a technical choice affects the user (costs, accounts to create, steps only they can take), say so plainly. When a request conflicts with these principles, say so and propose a better way.
 
 ## Done when
