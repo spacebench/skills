@@ -41,7 +41,14 @@ These work on any project, whether or not it was started with `groundwork`.
 
 ## Installing
 
-Copy a skill's directory from `skills/` into `~/.claude/skills/` to use it in every project, or into a project's `.claude/skills/` to use it there only.
+Clone this repository, then symlink each skill's directory from `skills/` into `~/.claude/skills/` to use it in every project, or into a project's `.claude/skills/` to use it there only. Always symlink, never copy: a symlink keeps every installed skill identical to the clone, so a `git pull` updates them all, while a copy silently goes stale. From the clone's root:
+
+```sh
+mkdir -p ~/.claude/skills
+for skill in "$PWD"/skills/*/; do ln -sfn "${skill%/}" ~/.claude/skills/; done
+```
+
+If a skill was copied before, delete that copy first; `ln` refuses to replace a directory. Run the loop again after a pull that adds a skill.
 
 ## Contributing
 
