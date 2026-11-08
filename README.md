@@ -15,7 +15,7 @@ Prepares a new project before any code is written, whatever its technology: the 
 - **Capabilities first, interfaces second.** What the project can do is written once, independent of how it is reached (a CLI, an API, web pages, a game engine) and of where its data is stored, so interfaces and storage can be swapped.
 - **Truthful types.** Types say exactly what the domain allows, and are never weakened to satisfy the compiler.
 - **Every fact lives in one place.** What code does is documented in its doc comments, docs explain the why, and references use stable IDs, never numbers.
-- **Automated checks.** A formatter, a linter, a type checker and tests, run by a fast check after every change and a full check before work counts as done.
+- **Automated checks.** A formatter, a linter, a type checker and tests, run by a fast check after every change and a full check at the end of every session that changes code.
 
 ### Paths
 

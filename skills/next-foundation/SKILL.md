@@ -14,7 +14,7 @@ Read `AGENTS.md` and `docs/` first. The principles below apply the general ones 
 ## Environment
 
 - **Node and pnpm**, with their versions pinned where version managers and CI read them.
-- **A browser you can drive.** Work isn't done until you have used the app the way its users will. In Claude Code, this is the Claude in Chrome extension. It drives the user's own browser, so tell them you could see what they are signed into there.
+- **A browser you can drive**, so you can use what you change the way the app's users will. In Claude Code, this is the Claude in Chrome extension. It drives the user's own browser, so tell them you could see what they are signed into there.
 
 Settle with the user, up front, whatever only they can do, so the rest of the work needs no interruption.
 
@@ -40,7 +40,7 @@ A GitHub Actions workflow runs the full check on every push and pull request. It
 
 ## Principles for AGENTS.md
 
-**Continuous integration.** Every push runs the full check on a clean machine. A red run means the work isn't done, whatever passed locally, and fixing it comes first. Follow each run until it finishes. Neither the workflow nor the check is ever weakened to get a green run. The definition of done gains a green run on the pushed commit, and having used the app in the browser.
+**Continuous integration.** Every push runs the full check on a clean machine. A red run means the work isn't done, whatever passed locally, and fixing it comes first. Follow each run until it finishes. Neither the workflow nor the check is ever weakened to get a green run.
 
 **Capabilities and interfaces in Next.js.** Data access is the only code that knows about Drizzle. Capabilities never import from Next.js. Server components and server actions are interfaces, as a CLI or a public API added later would be.
 

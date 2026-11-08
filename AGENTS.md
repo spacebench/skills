@@ -8,14 +8,14 @@ This file is the repo's only agent instruction file. Don't add a `CLAUDE.md`, `.
 
 What a skill asks for is the maintainer's decision. When a request makes skills contradict each other or breaks a convention below, say so and propose a better way.
 
-## Definition of done
+## Ending a session
 
-Work is finished when the full check passes, `README.md` and `docs/state.md` reflect reality, and the work is committed and pushed. A passing check proves only the structure. Before finishing, reread each changed skill the way an agent will read it: cold, with no memory of this conversation, taking every line literally. Never make a check pass by weakening the linter or a rule without telling the user why.
+A session that changed files ends with the full check passing, `README.md` and `docs/state.md` reflecting reality, and the work committed and pushed. A passing check proves only the structure, so before finishing, reread each changed skill the way an agent will read it: cold, with no memory of this conversation, taking every line literally. Never make a check pass by weakening the linter or a rule without telling the user why.
 
 ## Checks
 
 - `pnpm check:fast` applies Prettier to every file, Markdown included, then runs the skill linter (`scripts/check.ts`) and `tsc`. Every turn that changes files ends with it.
-- `pnpm check` also runs the linter's tests, and only verifies formatting instead of applying it. It is what the definition of done refers to.
+- `pnpm check` also runs the linter's tests, and only verifies formatting instead of applying it. Every session that changed files ends with it.
 
 The linter's rules are plain functions in `scripts/lint.ts`, tested in `scripts/lint.test.ts`. `scripts/check.ts` only runs them on the repo.
 
@@ -40,4 +40,4 @@ These hold for every skill, because an agent reads each one in isolation. The li
 - **Manual only.** Every skill sets `disable-model-invocation: true`, and its description ends with "Use only when the user explicitly invokes it."
 - **No enforced order.** A skill never names another skill, checks whether one was applied, or stops because one wasn't. The recommended order, `groundwork` first, then a path for the project's technology, is described in `README.md` only.
 - **Principles live in `groundwork`.** Its principles apply to any project. A path writes its own principles as applications of them, not restatements, and the standalone skills work within whatever principles a project states.
-- **Shared vocabulary.** The skills share terms with the `AGENTS.md` that `groundwork` writes: "the fast check" and "the full check", "the definition of done", "capabilities" and "interfaces", and `docs/state.md`. When you change one of these terms, change it in every skill.
+- **Shared vocabulary.** The skills share terms with the `AGENTS.md` that `groundwork` writes: "the fast check" and "the full check", "capabilities" and "interfaces", and `docs/state.md`. When you change one of these terms, change it in every skill.
