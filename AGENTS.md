@@ -1,6 +1,6 @@
 # Skills repo
 
-This repo holds Claude Code skills for anyone to use, one per directory under `skills/` (`skills/<name>/SKILL.md`), and nothing else lives there. What each skill does is in `README.md`. The repo follows the `groundwork` skill's principles, applied to itself.
+This repo holds Claude Code skills for anyone to use, one per directory under `skills/` (`skills/<name>/SKILL.md`), and nothing else lives there. What each skill does is in `README.md`.
 
 This file is the repo's only agent instruction file. Don't add a `CLAUDE.md`, `.claude/CLAUDE.md` or `CLAUDE.local.md`: Claude Code would then stop reading this one.
 
@@ -14,10 +14,7 @@ A session that changed files ends with the full check passing, `README.md` refle
 
 ## Checks
 
-- `pnpm check:fast` applies Prettier to every file, Markdown included, then runs the skill linter (`scripts/check.ts`) and `tsc`. Every turn that changes files ends with it.
-- `pnpm check` also runs the linter's tests, and only verifies formatting instead of applying it. Every session that changed files ends with it.
-
-The linter's rules are plain functions in `scripts/lint.ts`, tested in `scripts/lint.test.ts`. `scripts/check.ts` only runs them on the repo.
+`pnpm check:fast` is the fast check: it formats every file, Markdown included, lints the skills and type-checks, and every turn that changes files ends with it. `pnpm check` is the full check: it verifies formatting instead of applying it, and also runs the linter's tests.
 
 ## Git
 
