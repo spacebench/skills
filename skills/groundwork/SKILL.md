@@ -17,9 +17,7 @@ The project needs git configured with the user's identity and an authenticated G
 
 ## AGENTS.md
 
-`AGENTS.md`, at the project root, is the only agent instruction file. Claude Code reads it natively, but only when there is no `CLAUDE.md`, `.claude/CLAUDE.md` or `CLAUDE.local.md` in the project or a folder above it (the user's own `~/.claude/CLAUDE.md` doesn't count). Any of those silently replaces it. Create none of them, tell the user if one exists above the project, and state the rule in `AGENTS.md` so later sessions keep it.
-
-Write the principles below into it. Reword and tighten them freely, but keep each one with its reason: the reason is what lets a later agent apply a principle to a case nobody foresaw. Principles specific to a stack come later, written as applications of these, not restatements.
+Write the principles below into `AGENTS.md`, at the project root. Reword and tighten them freely, but keep each one with its reason: the reason is what lets a later agent apply a principle to a case nobody foresaw. Principles specific to a stack come later, written as applications of these, not restatements.
 
 **Automated checks.** The project has a formatter, a linter, a compiler or type checker, and tests, each with the standard tool for its stack. The formatter covers every file the project keeps, Markdown included, so the layout of docs never depends on who last wrote them. Two commands run the checks. The fast check formats, lints and type-checks, and every turn that changed files ends with it, so problems are caught while they are small. The full check runs everything, including tests and any build, and every session that changed code ends with it. Formatting is applied by the formatter, never fixed by hand. Never make a check pass by disabling a rule or skipping a test without saying why.
 
