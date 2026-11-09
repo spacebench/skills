@@ -58,6 +58,6 @@ A GitHub Actions workflow runs the full check on every push and pull request. It
 - The home page, rendered on the server, shows seeded data read through the domain layer. That proves the chain from schema to page. The reset command works.
 - The full check passes, with at least one real unit test of a domain function and one Playwright smoke test. CI is green on the latest pushed commit.
 - You have opened the app in the browser and seen it work.
-- `AGENTS.md`, `docs/state.md` and the README (how to run the app and reset its data) reflect what now exists.
+- `AGENTS.md`, `docs/` and the README (how to run the app and reset its data) reflect what now exists.
 
 Tell the user what now exists.

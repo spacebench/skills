@@ -1,6 +1,6 @@
 # Skills repo
 
-This repo holds Claude Code skills for anyone to use, one per directory under `skills/` (`skills/<name>/SKILL.md`), and nothing else lives there. What each skill does is in `README.md`, and the current state of the repo is in `docs/state.md`. The repo follows the `groundwork` skill's principles, applied to itself.
+This repo holds Claude Code skills for anyone to use, one per directory under `skills/` (`skills/<name>/SKILL.md`), and nothing else lives there. What each skill does is in `README.md`. The repo follows the `groundwork` skill's principles, applied to itself.
 
 This file is the repo's only agent instruction file. Don't add a `CLAUDE.md`, `.claude/CLAUDE.md` or `CLAUDE.local.md`: Claude Code would then stop reading this one.
 
@@ -10,7 +10,7 @@ What a skill asks for is the maintainer's decision. When a request makes skills 
 
 ## Ending a session
 
-A session that changed files ends with the full check passing, `README.md` and `docs/state.md` reflecting reality, and the work committed and pushed. A passing check proves only the structure, so before finishing, reread each changed skill the way an agent will read it: cold, with no memory of this conversation, taking every line literally. Never make a check pass by weakening the linter or a rule without telling the user why.
+A session that changed files ends with the full check passing, `README.md` reflecting reality, and the work committed and pushed. A passing check proves only the structure, so before finishing, reread each changed skill the way an agent will read it: cold, with no memory of this conversation, taking every line literally. Never make a check pass by weakening the linter or a rule without telling the user why.
 
 ## Checks
 
@@ -40,4 +40,4 @@ These hold for every skill, because an agent reads each one in isolation. The li
 - **Manual only.** Every skill sets `disable-model-invocation: true`, and its description ends with "Use only when the user explicitly invokes it."
 - **No enforced order.** A skill never names another skill, checks whether one was applied, or stops because one wasn't. The recommended order, `groundwork` first, then a path for the project's technology, is described in `README.md` only.
 - **Principles live in `groundwork`.** Its principles apply to any project. A path writes its own principles as applications of them, not restatements, and the standalone skills work within whatever principles a project states.
-- **Shared vocabulary.** The skills share terms with the `AGENTS.md` that `groundwork` writes: "the fast check" and "the full check", "capabilities" and "interfaces", and `docs/state.md`. When you change one of these terms, change it in every skill.
+- **Shared vocabulary.** The skills share terms with the `AGENTS.md` that `groundwork` writes: "the fast check" and "the full check", "capabilities" and "interfaces", and "instructions", "docs" and "notes". When you change one of these terms, change it in every skill.

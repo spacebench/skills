@@ -59,6 +59,6 @@ A GitHub Actions workflow runs the full check on every push and pull request. It
 - The main scene shows state that comes from the rules library, which proves the chain from domain to screen. A fixture state launches by name from the command line, and the reset command works.
 - The full check passes, with at least one real unit test of a domain function and one headless smoke test. CI is green on the latest pushed commit.
 - You have run the game through the debug launch and looked at its screenshots, and told the user what to playtest.
-- `AGENTS.md`, `docs/state.md` and the README (how to run the game, launch a fixture state, and reset local data) reflect what now exists.
+- `AGENTS.md`, `docs/` and the README (how to run the game, launch a fixture state, and reset local data) reflect what now exists.
 
 Tell the user what now exists.

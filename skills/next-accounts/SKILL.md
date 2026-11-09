@@ -19,7 +19,7 @@ Whether people work together in the app, or each user only ever sees their own d
 - **The caller identity** always carries the user, their active workspace and their role in it.
 - **Permissions** are checked against the workspace and the role, so they work unchanged whether a workspace has one member or many.
 
-Without teams, the personal workspace stays invisible, and nothing about members or invitations is built. Either way, record the choice in `docs/state.md`, and describe in `docs/` what turning teams on involves.
+Without teams, the personal workspace stays invisible, and nothing about members or invitations is built. Either way, record the choice in `docs/`, along with what turning teams on involves.
 
 ## What users can do
 
@@ -70,6 +70,6 @@ Several users, each with data in their personal workspace. With teams, add sever
   - deleting a seeded user leaves nothing of theirs behind, and the schema coverage test passes.
 - Playwright covers the account flows and, with teams, the invitation flow.
 - `docs/privacy.md` covers all personal data stored so far. The example env file and the README are current.
-- The full check passes and CI is green on the pushed commit. `AGENTS.md` and `docs/state.md` reflect what is new, including whether teams are on.
+- The full check passes and CI is green on the pushed commit. `AGENTS.md` and `docs/` reflect what is new, including whether teams are on.
 
 Tell the user what they can now do with the app.

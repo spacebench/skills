@@ -14,7 +14,8 @@ Prepares a new project before any code is written, whatever its technology: the 
 
 - **Capabilities first, interfaces second.** What the project can do is written once, independent of how it is reached (a CLI, an API, web pages, a game engine) and of where its data is stored, so interfaces and storage can be swapped.
 - **Truthful types.** Types say exactly what the domain allows, and are never weakened to satisfy the compiler.
-- **Every fact lives in one place.** What code does is documented in its doc comments, docs explain the why, and references use stable IDs, never numbers.
+- **Every fact lives in one place.** What code does is documented in its doc comments, and references use stable IDs, never numbers.
+- **Instructions, docs and notes.** `AGENTS.md` says how work is done and changes only when you ask. `docs/` describes the project as it is now and changes with its shape, not with every edit. Working notes stay outside the repo, where losing them costs nothing.
 - **Automated checks.** A formatter, a linter, a type checker and tests, run by a fast check after every change and a full check at the end of every session that changes code.
 
 ### Paths
@@ -52,7 +53,7 @@ If a skill was copied before, delete that copy first; `ln` refuses to replace a 
 
 ## Contributing
 
-Working conventions are in `AGENTS.md`, and the current state is in `docs/state.md`. Run the checks before committing:
+Working conventions are in `AGENTS.md`. Run the checks before committing:
 
 ```sh
 pnpm install
