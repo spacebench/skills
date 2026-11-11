@@ -9,7 +9,7 @@ argument-hint: "[teams or not, and anything worth knowing]"
 
 This gives a Next.js app user accounts, workspaces, a permission model, and the privacy foundations every later feature plugs into, all working locally with no external service.
 
-Read `AGENTS.md` and `docs/` first. This skill assumes a Next.js app on Drizzle and Postgres, with Zod at its boundaries, server actions for changes of data, and unit and end-to-end tests in the full check. Where the project does something differently, follow the project.
+This skill assumes a Next.js app on Drizzle and Postgres, with Zod at its boundaries, server actions for changes of data, and unit and end-to-end tests in the full check. Where the project does something differently, follow the project.
 
 ## Teams
 

@@ -27,7 +27,7 @@ The root is the goal. Intermediate goals serve it, such as "tools return results
 
 ## Phase 1: diagnose, read-only
 
-Before opening any project file, sketch what the project should need given the goal alone. It is a reference point to compare against, not a design. Then read the files in scope, and use version control to recover why questionable rules were introduced, and when.
+Before opening any project file, sketch what the project should need given the goal alone. It is a reference point to compare against, not a design. Then read the files in scope, and find why and when questionable rules were introduced.
 
 Build the graph, and tag each node and edge **[stated]** when the documents say so, or **[inferred]** when you deduced it. Misunderstandings hide in the inferred ones. Then play the consumer through a typical task, with the project's actual tools and rules. Concrete use exposes absurdities faster than abstract reasoning.
 

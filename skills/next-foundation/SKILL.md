@@ -9,12 +9,12 @@ argument-hint: "[anything worth knowing about the app]"
 
 This lays the foundation of a Next.js application: a project that runs locally with no external service, with its checks, continuous integration, and the principles of this stack in `AGENTS.md`. Features come later.
 
-Read `AGENTS.md` and `docs/` first. The principles below apply the general ones written there, and are added to them as applications, not restatements.
+The principles below apply the general ones in `AGENTS.md`, and are added to it as applications, not restatements.
 
 ## Environment
 
 - **Node and pnpm**, with their versions pinned where version managers and CI read them.
-- **A browser you can drive**, so you can use what you change the way the app's users will. In Claude Code, this is the Claude in Chrome extension. It drives the user's own browser, so tell them you could see what they are signed into there.
+- **A browser you can drive**, so you can use what you change the way the app's users will. If it drives the user's own browser, tell them you could see what they are signed into there.
 
 Settle with the user, up front, whatever only they can do, so the rest of the work needs no interruption.
 
@@ -44,7 +44,7 @@ A GitHub Actions workflow runs the full check on every push and pull request. It
 
 **Capabilities and interfaces in Next.js.** Data access is the only code that knows about Drizzle. Capabilities never import from Next.js. Server components and server actions are interfaces, as a CLI or a public API added later would be.
 
-**Server actions, not internal APIs.** Server components get their data by calling domain functions, never by fetching the app's own HTTP endpoints. Every change of data the UI triggers goes through a server action. An action reads the session and the input, validates them, calls the domain, revalidates or redirects, and returns a typed result the UI can show, field errors included. Route handlers exist only for what truly needs an HTTP endpoint, such as webhooks, auth callbacks, or an API with a real external consumer.
+**Server actions, not internal APIs.** Server components get their data by calling domain functions, never by fetching the app's own HTTP endpoints. Every change of data the UI triggers goes through a server action. An action returns a typed result the UI can show, field errors included. Route handlers exist only for what truly needs an HTTP endpoint, such as webhooks, auth callbacks, or an API with a real external consumer.
 
 **Everything is validated with Zod.** No data enters the system unparsed: action inputs, route and search parameters, request bodies, cookies and headers read for logic, environment variables, and responses from outside services. Domain functions validate their own inputs too, so they stay safe whatever calls them. Each schema is defined once. Types are inferred from it, and the same schema validates forms on the client when the UI needs instant feedback. A validation failure becomes a typed, user-facing error, never a silent default.
 

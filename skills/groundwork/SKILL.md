@@ -9,8 +9,6 @@ argument-hint: "[what the project is, and anything worth knowing]"
 
 This prepares a new project, before any code and whatever its technology: a repository on GitHub, and an `AGENTS.md` holding the working principles every later session follows. The stack and its tools come later, built on these principles.
 
-Take what the user said when invoking it as context, along with the folder and the conversation. Ask only about what you can't infer and what would change the result. Adapt to the user: the language they write in, and how much technical detail they want.
-
 ## Environment
 
 The project needs git configured with the user's identity and an authenticated GitHub CLI. Help the user with whatever is missing: only they can install software on their machine and sign in to their accounts. Then create the repository, on GitHub too, and push. From then on, you manage git and the remote.
@@ -38,10 +36,7 @@ Write the principles below into `AGENTS.md`, at the project root. Reword and tig
 
 **Git.** The agent manages git. It commits each coherent, passing unit of work with a message that explains why, and pushes. It never commits secrets and never rewrites pushed history.
 
-**Orchestrating sessions.** The main session orchestrates and subagents do the work, so the main session's context stays small and sharp over a long session: everything it reads, it carries to the end. Work quicker to do than to explain, such as a small fix or a question, stays in the main session, since a subagent starts cold and must rebuild the context first.
-
-- One subagent per task, small enough for one short sitting. Its prompt names the task, the doc sections to read (by ID, not whole docs), the files in play, what done means, and a budget: how many tries before it commits what is good and reports what is left. It ends with the full check and commits only its own files.
-- It reports back in a few lines: what changed, the commit, what it couldn't do, and any question for the user. The main session reads reports and the docs it needs to decide. It doesn't read code or logs, since that is the context the subagent exists to hold.
+**Orchestrating sessions.** The main session orchestrates and subagents do the work, so the main session's context stays small and sharp over a long session: everything it reads, it carries to the end. Work quicker to do than to explain, such as a small fix or a question, stays in the main session, since a subagent starts cold and must rebuild the context first. Each subagent gets a task small enough for one short sitting, and a budget: how many tries before it commits what is good and reports what is left. The main session reads reports and the docs it needs to decide, not code or logs, since that is the context the subagent exists to hold.
 
 **Working with the user.** Product decisions belong to the user. Technical decisions are yours, and so is the quality of the work. When a technical choice affects the user (costs, accounts to create, steps only they can take), say so plainly. When a request conflicts with these principles, say so and propose a better way.
 

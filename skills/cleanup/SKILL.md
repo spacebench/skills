@@ -13,19 +13,19 @@ Scope: what the user asked for, by default the whole repository, skipping genera
 
 ## The project's principles come first
 
-Read the project's instruction files and docs before judging anything. Their principles are constraints. What they ask for is never a cleanup target, even when it resembles the excess listed below. For example, a layer that keeps capabilities independent of their interfaces or of their storage is structure, not indirection. A doc comment that describes what code does is where that description belongs.
+The principles in the project's instructions and docs are constraints. What they ask for is never a cleanup target, even when it resembles the excess listed below. For example, a layer that keeps capabilities independent of their interfaces or of their storage is structure, not indirection. A doc comment that describes what code does is where that description belongs.
 
 Where the code breaks those principles, bringing it back in line is in scope. Examples: a capability that reaches a database client directly, docs that restate what doc comments already say, a type weakened to silence the compiler. If a principle itself looks wrong, say so in the report. Questioning the rules is not this skill's job.
 
 ## Before the first pass
 
-Find the project's checks: its fast and full checks if it defines them. Start from a clean working tree, so the final diff holds only the cleanup. If the tree isn't clean, ask. Run the checks first. Formatting and lint failures are in scope. Failing tests or a failing build mean you stop and report, since behavior preservation can't be verified on a red baseline.
+Start from a clean working tree, so the final diff holds only the cleanup. If the tree isn't clean, ask. On the starting tree, formatting and lint failures are in scope, while failing tests or a failing build mean you stop and report, since behavior preservation can't be verified on a red baseline.
 
 ## Passes
 
 Each pass surveys the whole scope afresh, not from memory of the previous pass. It applies the changes that clear the bar, and ends with every check passing: a change that breaks something is fixed properly or reverted. What to look for:
 
-- **Dead code**: unused functions, exports, imports, variables, files, dependencies, config keys, flags that are never toggled, commented-out code.
+- **Dead code**, including unused dependencies and config keys, flags that are never toggled, and commented-out code.
 - **Inconsistency**: the same thing done in different ways (naming, error handling, logging, file layout, recurring patterns). Converge on the project's stated or dominant convention, never a new one.
 - **Excess**: indirection that serves no principle, wrappers that only forward, abstractions with one use and no reason, defensive code for impossible cases, functions doing several unrelated things.
 - **Modularity**: one responsibility per module, clear boundaries, no circular dependencies. Extract duplication only when it is the same concept, not a coincidental resemblance.
