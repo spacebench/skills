@@ -1,17 +1,17 @@
 ---
 name: orchestrate
-description: Runs a piece of work as an orchestrator. The main session plans, hands every substantial task to subagents on smaller models, checks what they report and keeps its own context small, so long work stays sharp and costs less. Use only when the user explicitly invokes it.
+description: Runs a piece of work as an orchestrator. The main session plans, hands every substantial task to subagents on smaller models, checks what they report and keeps its own context small, so it gets a lot of work done over hours. Use only when the user explicitly invokes it.
 disable-model-invocation: true
 argument-hint: "[the work to get done, and anything worth knowing]"
 ---
 
 # Orchestrate
 
-This session orchestrates the work the user describes: it decides, delegates and verifies, while subagents do the work. There are three reasons to work this way:
+This session orchestrates the work the user describes: it decides, delegates and verifies, while subagents do the work. The goal is to get a lot of work done over hours without the main session's context growing. Everything below serves that goal, so adapt it to the work in front of you. Three things make it possible, and each matters as much as the others:
 
 - **Context.** Everything the main session reads, it carries to the end. A session that reads code and logs gets slower, costlier and less sharp as it goes. One that reads only decisions and reports stays sharp over long work.
 - **Cost.** Subagents run on smaller models, which are cheaper and faster, and do most tasks as well once those tasks are well posed. Posing them well is the orchestrator's job.
-- **Parallelism.** Independent tasks run at the same time.
+- **Parallelism.** Independent tasks run at the same time, so many small tasks finish sooner than one large one.
 
 ## Done when
 
@@ -24,6 +24,12 @@ This session orchestrates the work the user describes: it decides, delegates and
 Read what the user said, the project's instructions, and the docs needed to understand the work, but not its code. Ask the user what you can't infer and what would change the result now, before delegating anything: subagents can't ask the user, so an ambiguity left open spreads into every brief that touches it.
 
 Then split the work into tasks, and keep the plan in your notes, outside the repo, updated as reports come in. The plan is what lets you pick the work back up if your context is summarized.
+
+## The usual loop
+
+A cheap scout finds what the work concretely lacks, you decide the change, a builder makes exactly that change, and you verify. These are separate tasks: a brief that says "assess, then fix" has skipped the first two steps and left the decision to the subagent.
+
+Keep workers busy: scouts run ahead of builders, and a free slot gets the next brief. Report to the user at the end or when blocked, not after each task.
 
 ## What stays in the main session
 
@@ -43,7 +49,9 @@ When a subagent fails because the task was beyond it, retry one size up with wha
 
 ## Sizing tasks
 
-A task is one coherent unit of work that can end with the checks passing, small enough for one short sitting. A bigger task fills its subagent's context, and quality drops long before the context runs out. Give each subagent a budget counted in what it can see, such as tries or files, never in tokens, since it can't measure its own context. When the budget runs out, it keeps what is good and reports what is left. Such a report means the task was too big: split what remains before sending it again.
+A task is one coherent unit of work that can end with the checks passing, small enough for one short sitting. An item of the project's plan is usually many tasks: split it yourself, since the project's split serves the project, not a subagent's context. A bigger task fills its subagent's context, and quality drops long before the context runs out. Give each subagent a budget counted in what it can see, such as tries or files, never in tokens, since it can't measure its own context. When the budget runs out, it keeps what is good and reports what is left. Such a report means the task was too big: split what remains before sending it again.
+
+"One short sitting" is easy to rationalise, so measure it. A finished subagent's result shows its token use and tool calls: past roughly 100k tokens or 40 tool calls, the task was too big, whatever the result, so cut the next ones smaller. Don't interrupt a running subagent to fix its size; fix the next brief.
 
 Tasks that depend on another one wait for its report. Independent tasks run in parallel, but concurrent writers in one working tree collide, on files and on commits. Parallel tasks that write either touch disjoint files and leave committing to you once they are all done, or each work in its own worktree when the project's git rules allow branches. A task that runs alone commits its own work as the project's git rules say.
 
