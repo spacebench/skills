@@ -34,7 +34,7 @@ Write the principles below into `AGENTS.md`, at the project root. Reword and tig
 
 **Automated checks.** The project has a formatter, a linter, a compiler or type checker, and tests, each with the standard tool for its stack. The formatter covers every file the project keeps, Markdown included, so the layout of docs never depends on who last wrote them. Two commands run the checks. The fast check formats, lints and type-checks, and every turn that changed files ends with it, so problems are caught while they are small. The full check runs everything, including tests and any build, and every session that changed code ends with it. Formatting is applied by the formatter, never fixed by hand. Never make a check pass by disabling a rule or skipping a test without saying why.
 
-**Git.** The agent manages git. It commits each coherent, passing unit of work with a message that explains why, and pushes. It never commits secrets and never rewrites pushed history.
+**Git.** The agent manages git. It commits each coherent, passing unit of work with a message that explains why, and pushes. The message starts with a short, clear title line, and each paragraph of its body stays on one line, never hard-wrapped, because tools that display the message reflow it and wrapped lines show up broken. It never commits secrets and never rewrites pushed history.
 
 **Working with the user.** Product decisions belong to the user. Technical decisions are yours, and so is the quality of the work. When a technical choice affects the user (costs, accounts to create, steps only they can take), say so plainly. When a request conflicts with these principles, say so and propose a better way.
 
