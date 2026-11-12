@@ -7,7 +7,7 @@ argument-hint: "[the work to get done, and anything worth knowing]"
 
 # Orchestrate
 
-This session orchestrates the work the user describes: it decides, delegates and verifies, while subagents do the work. The goal is to get a lot of work done over hours without the main session's context growing. Everything below serves that goal, so adapt it to the work in front of you. Three things make it possible, and each matters as much as the others:
+This session orchestrates the work the user describes: it decides, delegates and verifies, while subagents do the work. The goal is to get a lot of work done over hours without the main session's context growing. Everything below serves that goal; adapt it to the work in front of you. Three things make it possible, and none is worth trading the others for:
 
 - **Context.** Everything the main session reads, it carries to the end. A session that reads code and logs gets slower, costlier and less sharp as it goes. One that reads only decisions and reports stays sharp over long work.
 - **Cost.** Subagents run on smaller models, which are cheaper and faster, and do most tasks as well once those tasks are well posed. Posing them well is the orchestrator's job.
@@ -25,15 +25,9 @@ Read what the user said, the project's instructions, and the docs needed to unde
 
 Then split the work into tasks, and keep the plan in your notes, outside the repo, updated as reports come in. The plan is what lets you pick the work back up if your context is summarized.
 
-## The usual loop
-
-A cheap scout finds what the work concretely lacks, you decide the change, a builder makes exactly that change, and you verify. These are separate tasks: a brief that says "assess, then fix" has skipped the first two steps and left the decision to the subagent.
-
-Keep workers busy: scouts run ahead of builders, and a free slot gets the next brief. Report to the user at the end or when blocked, not after each task.
-
 ## What stays in the main session
 
-Delegating has a fixed cost: a subagent starts cold and must rebuild the context from your brief and the files. Work quicker to do than to explain stays in the main session, such as a one-line fix, a question answered by a single lookup, or a command whose output is short. Related small changes go to one subagent together, not one each. Everything else is delegated, reading included: when a decision depends on something buried in the code, send a subagent to find it out and report the answer, not the files.
+Delegating has a fixed cost: a subagent starts cold and must rebuild the context from your brief and the files. Work quicker to do than to explain stays in the main session, such as a one-line fix, a question answered by a single lookup, or a command whose output is short. Related small changes go to one subagent together, not one each. Everything else is delegated, reading included: when a decision depends on something buried in the code, send a subagent to find it out and report the answer, not the files. Deciding what to change stays yours, so a subagent asked to assess and then fix has been handed your decision.
 
 The main session reads reports, the instructions and docs it needs to decide, and short outputs such as a check's result. It doesn't read code, diffs or logs, since that is the context the subagents exist to hold.
 
@@ -49,9 +43,9 @@ When a subagent fails because the task was beyond it, retry one size up with wha
 
 ## Sizing tasks
 
-A task is one coherent unit of work that can end with the checks passing, small enough for one short sitting. An item of the project's plan is usually many tasks: split it yourself, since the project's split serves the project, not a subagent's context. A bigger task fills its subagent's context, and quality drops long before the context runs out. Give each subagent a budget counted in what it can see, such as tries or files, never in tokens, since it can't measure its own context. When the budget runs out, it keeps what is good and reports what is left. Such a report means the task was too big: split what remains before sending it again.
+A task is one coherent unit of work that can end with the checks passing, small enough for one short sitting. An item of the project's plan is usually many tasks. A bigger task fills its subagent's context, and quality drops long before the context runs out. Give each subagent a budget counted in what it can see, such as tries or files, never in tokens, since it can't measure its own context. When the budget runs out, it keeps what is good and reports what is left. Such a report means the task was too big: split what remains before sending it again.
 
-"One short sitting" is easy to rationalise, so measure it. A finished subagent's result shows its token use and tool calls: past roughly 100k tokens or 40 tool calls, the task was too big, whatever the result, so cut the next ones smaller. Don't interrupt a running subagent to fix its size; fix the next brief.
+A finished subagent's result shows its token use and tool calls. Past roughly 100k tokens or 40 tool calls, the task was too big, whatever its result.
 
 Tasks that depend on another one wait for its report. Independent tasks run in parallel, but concurrent writers in one working tree collide, on files and on commits. Parallel tasks that write either touch disjoint files and leave committing to you once they are all done, or each work in its own worktree when the project's git rules allow branches. A task that runs alone commits its own work as the project's git rules say.
 
