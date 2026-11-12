@@ -20,6 +20,8 @@ A session that changed files ends with the full check passing, `README.md` refle
 
 The agent manages git: it commits each coherent, passing unit of work with a message that explains why, pushes, and never rewrites pushed history. The default branch is `master`.
 
+A commit message starts with a short, clear title line. Each paragraph of the body stays on one line, never hard-wrapped, because tools that display the message reflow it, and wrapped lines show up broken there.
+
 ## How skills are written
 
 Skills are prompts for frontier models. A capable model needs an environment and a goal, not a pipeline.
