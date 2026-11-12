@@ -12,10 +12,10 @@ A new project starts with `groundwork`. Then a path for the chosen technology bu
 
 Prepares a new project before any code is written, whatever its technology: the git and GitHub repository, and an `AGENTS.md` holding the working principles every later session follows. At their core:
 
-- **Capabilities first, interfaces second.** What the project can do is written once, independent of how it is reached (a CLI, an API, web pages, a game engine) and of where its data is stored, so interfaces and storage can be swapped.
-- **Truthful types.** Types say exactly what the domain allows, and are never weakened to satisfy the compiler.
-- **Every fact lives in one place.** What code does is documented in its doc comments, and references use stable IDs, never numbers.
 - **Instructions, docs and notes.** `AGENTS.md` says how work is done and changes only when you ask. `docs/` describes the project as it is now and changes with its shape, not with every edit. Working notes stay outside the repo, where losing them costs nothing.
+- **Every fact lives in one place.** What code does is documented in its doc comments, and references use stable IDs, never numbers.
+- **Truthful types.** Types say exactly what the domain allows, and are never weakened to satisfy the compiler.
+- **Capabilities first, interfaces second.** What the project can do is written once, independent of how it is reached (a CLI, an API, web pages, a game engine) and of where its data is stored, so interfaces and storage can be swapped.
 - **Automated checks.** A formatter, a linter, a type checker and tests, run by a fast check after every change and a full check at the end of every session that changes code.
 
 ### Paths
@@ -38,6 +38,7 @@ Other paths can be added the same way, for example Python data science.
 These work on any project, whether or not it was started with `groundwork`.
 
 - `cleanup` runs behavior-preserving cleanup passes until one finds nothing worth changing.
+- `orchestrate` runs a piece of work as an orchestrator: the main session plans and checks, while subagents on smaller models do the work, so its context stays small over long sessions.
 - `refocus` audits docs and rules against a goal you state, to find and drop the rules that no longer serve it.
 
 ## Installing
