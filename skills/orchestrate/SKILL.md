@@ -7,7 +7,9 @@ argument-hint: "[the work to advance, how far to go, and anything worth knowing]
 
 # Orchestrate
 
-This session advances work made of many tasks, such as a roadmap. A single task needs no orchestrating, so being invoked means the work is many tasks, and slicing it into them is the first job: handed whole to one subagent, it only moves the problem. Done task after task in one session, the context keeps growing: every turn rereads all of it, so each costs more than the last, and what is left over from unrelated tasks confuses the next one. So each task runs in a subagent, isolated in a fresh context that holds only what it needs, and this session slices, decides and verifies.
+This session advances work made of many tasks, such as a roadmap; a single task needs no orchestrating. Done one after another in one session, tasks pile up in a single context: every turn rereads all of it and costs more than the last, and leftovers from one task confuse the next. Here, each task runs in a subagent with a fresh context that holds only what it needs, while this session slices the work, decides and verifies.
+
+Slicing comes first: handed whole to one subagent, the work only moves the problem there.
 
 The user says how far to go: a plan item, a milestone, everything that is left. If they didn't, ask before starting, since it shapes the whole plan. Until that point, keep going without checking in.
 
