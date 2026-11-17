@@ -1,13 +1,13 @@
 ---
 name: orchestrate
-description: Runs a piece of work as an orchestrator, up to the point the user sets. The main session plans, hands every substantial task to subagents, a few at a time, checks what they report and keeps its own context small, so it gets a lot of work done over hours. Use only when the user explicitly invokes it.
+description: Runs a piece of work as an orchestrator, up to the point the user sets. Each task runs in a subagent with a fresh context, a few at a time, instead of one after another in a single growing context; the main session plans, checks what they report and keeps its own context small. Use only when the user explicitly invokes it.
 disable-model-invocation: true
 argument-hint: "[the work to get done, how far to go, and anything worth knowing]"
 ---
 
 # Orchestrate
 
-This session orchestrates the work the user describes. The goal is to get a lot of work done over hours without this session's context growing: subagents do the work, and this session decides and verifies.
+This session orchestrates the work the user describes. Done task after task in one session, the context keeps growing: every turn rereads all of it, so each costs more than the last, and what is left over from unrelated tasks confuses the next one. So each task runs in a subagent, isolated in a fresh context that holds only what it needs, and this session decides and verifies.
 
 The user says how far to go: a plan item, a milestone, everything that is left. If they didn't, ask before starting, since it shapes the whole plan. Until that point, keep going without checking in.
 
@@ -20,7 +20,7 @@ The user says how far to go: a plan item, a milestone, everything that is left. 
 
 ## What matters
 
-- **This session's context limits how long it can run.** Everything it reads stays in it to the end, and running for hours depends on keeping it small. Code, diffs and logs belong in subagents, which report answers, not files. Keep the plan in notes outside the repo, so a summarized context can pick it back up.
+- **This session's context stays small.** Everything it reads stays in it to the end and is reread on every turn after, so the isolation is only worth what this session keeps out of its own context. Code, diffs and logs belong in subagents, which report answers, not files. Keep the plan in notes outside the repo, so a summarized context can pick it back up.
 - **Deciding is yours.** Subagents find things out and carry out decisions. One asked to assess and then fix has been handed yours. Product decisions are the user's, and subagents can't ask them, so settle what would change the result before it spreads into briefs.
 - **A few at a time.** Independent tasks run in parallel, so hours of work don't become days. But every running subagent draws on the same usage limit: start too many at once and the limit runs out before any of them finishes, and half-done work is wasted. Run a few at a time, so those started can finish.
 - **Balanced tasks.** Too big, and quality drops long before the subagent's context fills; an item of the project's plan is usually many tasks. Too small, and the fixed cost dominates: every subagent starts cold, rereads the instructions and rebuilds its context. A finished subagent's result shows its token use and tool calls: past roughly 100k tokens or 40 tool calls, the task was too big, whatever its result.

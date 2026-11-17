@@ -38,7 +38,7 @@ Other paths can be added the same way, for example Python data science.
 These work on any project, whether or not it was started with `groundwork`.
 
 - `cleanup` runs behavior-preserving cleanup passes until one finds nothing worth changing.
-- `orchestrate` runs a piece of work as an orchestrator, up to the point you set: the main session plans and checks, while subagents do the work a few at a time, so it gets a lot done over hours without its context growing or running out of usage.
+- `orchestrate` runs a piece of work as an orchestrator, up to the point you set: each task runs in a subagent with a fresh context, a few at a time, instead of piling up in one session where every turn costs more and unrelated tasks blur together. The main session only plans and checks.
 - `refocus` audits docs and rules against a goal you state, to find and drop the rules that no longer serve it.
 
 ## Installing
