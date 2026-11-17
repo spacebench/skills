@@ -1,13 +1,13 @@
 ---
 name: orchestrate
-description: Runs a piece of work as an orchestrator, up to the point the user sets. Each task runs in a subagent with a fresh context, a few at a time, instead of one after another in a single growing context; the main session plans, checks what they report and keeps its own context small. Use only when the user explicitly invokes it.
+description: Advances work made of many tasks, such as a roadmap, up to the point the user sets. It slices the work into tasks and runs each in a subagent with a fresh context, a few at a time, instead of one after another in a single growing context; the main session decides, checks what they report and keeps its own context small. Use only when the user explicitly invokes it.
 disable-model-invocation: true
-argument-hint: "[the work to get done, how far to go, and anything worth knowing]"
+argument-hint: "[the work to advance, how far to go, and anything worth knowing]"
 ---
 
 # Orchestrate
 
-This session orchestrates the work the user describes. Done task after task in one session, the context keeps growing: every turn rereads all of it, so each costs more than the last, and what is left over from unrelated tasks confuses the next one. So each task runs in a subagent, isolated in a fresh context that holds only what it needs, and this session decides and verifies.
+This session advances work made of many tasks, such as a roadmap. A single task needs no orchestrating, so being invoked means the work is many tasks, and slicing it into them is the first job: handed whole to one subagent, it only moves the problem. Done task after task in one session, the context keeps growing: every turn rereads all of it, so each costs more than the last, and what is left over from unrelated tasks confuses the next one. So each task runs in a subagent, isolated in a fresh context that holds only what it needs, and this session slices, decides and verifies.
 
 The user says how far to go: a plan item, a milestone, everything that is left. If they didn't, ask before starting, since it shapes the whole plan. Until that point, keep going without checking in.
 
